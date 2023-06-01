@@ -16,7 +16,7 @@ function App() {
                 <Route index element={<RegistrationPage />} />
               </Route>
               <Route path="main">
-                <Route index element={<MainPage />} />
+                <Route index element={<div>jhgjhgjg</div>} />
               </Route>
             </Route>
           </Routes>

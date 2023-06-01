@@ -24,7 +24,7 @@ const LoginPage = () => {
       const res = await resp.json();
       localStorage.setItem("accessToken", res.token);
       localStorage.setItem("currentUser", JSON.stringify(res.user));
-      window.location.pathname = "/table";
+      window.location.pathname = "/main";
     } else {
       alert("Sign in failed");
     }

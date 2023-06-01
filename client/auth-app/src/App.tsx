@@ -12,11 +12,11 @@ function App() {
           <Routes>
             <Route path="/">
               <Route index element={<LoginPage />} />
-              <Route path="table">
-                <Route index element={<div>jhgjhgjg</div>} />
-              </Route>
               <Route path="sign-up">
                 <Route index element={<RegistrationPage />} />
+              </Route>
+              <Route path="main">
+                <Route index element={<MainPage />} />
               </Route>
             </Route>
           </Routes>

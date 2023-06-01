@@ -15,7 +15,7 @@ function App() {
               <Route path="sign-up">
                 <Route index element={<RegistrationPage />} />
               </Route>
-              <Route path="main">
+              <Route path="table">
                 <Route index element={<div>jhgjhgjg</div>} />
               </Route>
             </Route>

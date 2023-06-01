@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import { useNavigate } from "react-router";
+import { FETCH_URL } from "../../constants";
 
 export const RegistrationPage = () => {
   const navigate = useNavigate();
@@ -12,16 +13,13 @@ export const RegistrationPage = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const resp: Response = await fetch(
-      "http://localhost:5000/auth/registration",
-      {
-        method: "POST",
-        body: JSON.stringify(regFormData),
-        headers: {
-          "Content-Type": "application/json",
-        },
-      }
-    );
+    const resp: Response = await fetch(`${FETCH_URL}/registration`, {
+      method: "POST",
+      body: JSON.stringify(regFormData),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     if (resp.ok) {
       alert("Registration successful");
       window.location.pathname = "/";

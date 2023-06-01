@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { useNavigate } from "react-router";
+import { FETCH_URL } from "../../constants";
 
 const LoginPage = () => {
   const navigate = useNavigate();
@@ -12,7 +13,7 @@ const LoginPage = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
-    const resp: Response = await fetch("http://localhost:5000/auth/login", {
+    const resp: Response = await fetch(`${FETCH_URL}/login`, {
       method: "POST",
       body: JSON.stringify(loginFormData),
       headers: {

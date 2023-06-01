@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Table, Button, Form } from "react-bootstrap";
 import { IUserInfo } from "../../types";
 import { getCurrentUser, logOut } from "../../utils";
+import { FETCH_URL } from "../../constants";
 
 export const MainPage = () => {
   const [users, setUsers] = useState([] as IUserInfo[]);
@@ -11,7 +12,7 @@ export const MainPage = () => {
   useEffect(() => {
     async function fetchUsers() {
       const token = localStorage.getItem("accessToken");
-      const resp: Response = await fetch("http://localhost:5000/auth/users", {
+      const resp: Response = await fetch(`${FETCH_URL}/users`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -52,20 +53,17 @@ export const MainPage = () => {
 
   const handleBlockUsers = async () => {
     const token: string = localStorage.getItem("accessToken") || "";
-    const resp: Response = await fetch(
-      "http://localhost:5000/auth/users/block",
-      {
-        method: "PUT",
-        body: JSON.stringify({
-          userIds: [...selectedUsers],
-          currentUser: getCurrentUser(),
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const resp: Response = await fetch(`${FETCH_URL}/users/block`, {
+      method: "PUT",
+      body: JSON.stringify({
+        userIds: [...selectedUsers],
+        currentUser: getCurrentUser(),
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
     if (resp.ok) {
       alert("Users blocked successfully");
       if (selectedUsers.has(getCurrentUser()._id)) {
@@ -83,7 +81,7 @@ export const MainPage = () => {
 
   const handleUnblockUsers = async () => {
     const token: string = localStorage.getItem("accessToken") || "";
-    const resp = await fetch("http://localhost:5000/auth/users/unblock", {
+    const resp = await fetch(`${FETCH_URL}/users/unblock`, {
       method: "PUT",
       body: JSON.stringify({
         userIds: [...selectedUsers],
@@ -107,20 +105,17 @@ export const MainPage = () => {
 
   const handleDeleteUsers = async () => {
     const token: string = localStorage.getItem("accessToken") || "";
-    const resp: Response = await fetch(
-      "http://localhost:5000/auth/users/delete",
-      {
-        method: "DELETE",
-        body: JSON.stringify({
-          userIds: [...selectedUsers],
-          currentUser: getCurrentUser(),
-        }),
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    const resp: Response = await fetch(`${FETCH_URL}/users/delete`, {
+      method: "DELETE",
+      body: JSON.stringify({
+        userIds: [...selectedUsers],
+        currentUser: getCurrentUser(),
+      }),
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
     if (resp.ok) {
       alert("Users deleted successfully");
       selectedUsers.has(getCurrentUser()._id)
